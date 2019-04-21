@@ -95,9 +95,9 @@ def baidu_download_album(aid, output_dir='.', merge=True, info_only=False):
         if song_lrc:
             type, ext, size = url_info(song_lrc, faker=True)
             print_info(site_info, song_title, type, size)
-            if not info_only:
-                download_urls([song_lrc], file_name, ext,
-                              size, output_dir, faker=True)
+        if not info_only and song_lrc:
+            download_urls([song_lrc], file_name, ext,
+                          size, output_dir, faker=True)
 
         track_nr += 1
 
