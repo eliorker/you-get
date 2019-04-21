@@ -57,6 +57,13 @@ def _get_virtualPath(video_query_url):
 
 def _get_video_list(resourceID):
     """"""
+    def HugeListAppend(huge_list, isMain):
+        if isMain:
+            str = 'mainUrl'
+        else:
+            str = 'subUrl'
+        huge_list.append([i['value'] for i in
+                      sorted(r['video'][str][0]['_flv'][0]['part'][0]['video'], key=lambda k: int(k['index']))])
     conn = http.client.HTTPConnection("210.76.211.10")
         
     conn.request("GET", '/vplus/member/resource.do?isyulan=0&method=queryFlashXmlByResourceId&resourceId={resourceID}&randoms={randoms}'.format(resourceID = resourceID,
@@ -72,13 +79,15 @@ def _get_video_list(resourceID):
 
     huge_list = []
     # main
-    huge_list.append([i['value'] for i in sorted(r['video']['mainUrl'][0]['_flv'][0]['part'][0]['video'], key=lambda k: int(k['index']))])
-
+    HugeListAppend(huge_list,True)
     # sub
     if '_flv' in r['video']['subUrl'][0]:
-        huge_list.append([i['value'] for i in sorted(r['video']['subUrl'][0]['_flv'][0]['part'][0]['video'], key=lambda k: int(k['index']))])
-
+        HugeListAppend(huge_list,False)
     return huge_list
+
+
+
+
 
 def _ucas_get_url_lists_by_resourceID(resourceID):
     video_query_url = _get_video_query_url(resourceID)
