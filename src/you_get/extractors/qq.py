@@ -96,14 +96,14 @@ def kg_qq_download_by_shareid(shareid, output_dir='.', info_only=False, caption=
     print_info('腾讯全民K歌', title, type, size)
     if not info_only:
         download_urls([real_url], title, ext, size, output_dir, merge=False)
-        if caption:
-            caption_filename = title + '.lrc'
-            caption_path = output_dir + '/' + caption_filename
-            with open(caption_path, 'w') as f:
-                lrc_list = lyric.split('\r\n')
-                for line in lrc_list:
-                    f.write(line)
-                    f.write('\n')
+    if not info_only and caption:
+        caption_filename = title + '.lrc'
+        caption_path = output_dir + '/' + caption_filename
+        with open(caption_path, 'w') as f:
+            lrc_list = lyric.split('\r\n')
+            for line in lrc_list:
+                f.write(line)
+                f.write('\n')
 
 def qq_download(url, output_dir='.', merge=True, info_only=False, **kwargs):
     """"""
