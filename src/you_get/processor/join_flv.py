@@ -350,11 +350,10 @@ def main():
         if o in ("-h", "--help"):
             usage()
             sys.exit()
-        elif o in ("-o", "--output"):
-            output = a
-        else:
+        if o not in ("-o", "--output"):
             usage()
             sys.exit(1)
+        output = a
     if not args:
         usage()
         sys.exit(1)
