@@ -27,12 +27,6 @@ class MusicPlayOn(VideoExtractor):
                 url = 'http://en.musicplayon.com%s' % src
                 self.streams[quality] = {'url': url}
 
-    def extract(self, **kwargs):
-        for i in self.streams:
-            s = self.streams[i]
-            _, s['container'], s['size'] = url_info(s['url'])
-            s['src'] = [s['url']]
-
 site = MusicPlayOn()
 download = site.download_by_url
 # TBD: implement download_playlist

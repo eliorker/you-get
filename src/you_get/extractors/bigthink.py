@@ -67,5 +67,11 @@ class Bigthink(VideoExtractor):
             self.stream_types.append({'id': str(i[0])})
             self.streams[i[0]] = {'url': i[1]}
 
+    def extract(self, **kwargs):
+        for i in self.streams:
+            s = self.streams[i]
+            _, s['container'], s['size'] = url_info(s['url'])
+            s['src'] = [s['url']]
+
 site = Bigthink()
 download = site.download_by_url
