@@ -43,9 +43,8 @@ class Bigthink(VideoExtractor):
         link_list = []
 
         for i in html_json['sources']:
-            if 'src' in i:  #to avoid KeyError
-                if i['src'].startswith('https'):
-                    link_list.append((str(i['height']), i['src']))
+            if 'src' in i and i['src'].startswith('https'):
+                link_list.append((str(i['height']), i['src']))
 
         return link_list
 
